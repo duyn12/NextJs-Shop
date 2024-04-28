@@ -7,7 +7,6 @@ import authRoutes from '@/routes/auth.route'
 import fastifyAuth from '@fastify/auth'
 import fastifyCookie from '@fastify/cookie'
 import fastifyHelmet from '@fastify/helmet'
-import Fastify from 'fastify'
 import cors from '@fastify/cors'
 import path from 'path'
 import { createFolder } from '@/utils/helpers'
@@ -15,6 +14,9 @@ import mediaRoutes from '@/routes/media.route'
 import staticRoutes from '@/routes/static.route'
 import productRoutes from '@/routes/product.route'
 import testRoutes from '@/routes/test.route'
+import Fastify from 'fastify'
+import mongoose from 'mongoose'
+import productRoute from '@/routes/product.routes'
 
 const fastify = Fastify({
   logger: true
@@ -58,6 +60,9 @@ const start = async () => {
     })
     fastify.register(testRoutes, {
       prefix: '/test'
+    })
+    fastify.register(productRoute, {
+      prefix: '/product'
     })
     await fastify.listen({
       port: envConfig.PORT
