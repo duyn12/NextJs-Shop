@@ -1,10 +1,20 @@
 import z from 'zod'
 
+export const SearchPageAndSorting = z.object({
+  keyword: z.string(),
+  skipCount: z.number(),
+  maxResultCount: z.number()
+})
+
+export type SearchPageAndSortingType = z.TypeOf<typeof SearchPageAndSorting>
+
 export const CreateProductBody = z.object({
   name: z.string().min(1).max(256),
   price: z.number().positive(),
   description: z.string().max(10000),
-  image: z.string().url()
+  img: z.string().url(),
+  quantity: z.number(),
+  categoryId: z.number()
 })
 
 export type CreateProductBodyType = z.TypeOf<typeof CreateProductBody>
@@ -14,7 +24,9 @@ export const ProductSchema = z.object({
   name: z.string(),
   price: z.number(),
   description: z.string(),
-  image: z.string(),
+  categoryId: z.number(),
+  categoryName: z.string(),
+  img: z.string().url(),
   createdAt: z.date(),
   updatedAt: z.date()
 })
@@ -28,6 +40,7 @@ export type ProductResType = z.TypeOf<typeof ProductRes>
 
 export const ProductListRes = z.object({
   data: z.array(ProductSchema),
+  totalCount: z.number(),
   message: z.string()
 })
 
