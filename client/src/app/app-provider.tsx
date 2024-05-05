@@ -2,7 +2,6 @@
 import { clientSessionToken } from '@/lib/http'
 import { AccountResType } from '@/schemaValidations/account.schema'
 import { createContext, useContext, useState } from 'react'
-
 type User = AccountResType['data']
 
 const AppContext = createContext<{
