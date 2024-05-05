@@ -15,6 +15,7 @@ import {
   ProductParamsType,
   ProductRes,
   ProductResType,
+  SearchPageAndSortingType,
   UpdateProductBody,
   UpdateProductBodyType
 } from '@/schemaValidations/product.schema'
@@ -22,6 +23,7 @@ import { FastifyInstance, FastifyPluginOptions } from 'fastify'
 
 export default async function productRoutes(fastify: FastifyInstance, options: FastifyPluginOptions) {
   fastify.get<{
+    Params: SearchPageAndSortingType
     Reply: ProductListResType
   }>(
     '/',
@@ -33,9 +35,10 @@ export default async function productRoutes(fastify: FastifyInstance, options: F
       }
     },
     async (request, reply) => {
-      const products = await getProductList()
+      const products = await getProductList(request.params)
       reply.send({
         data: products,
+        totalCount: products.length,
         message: 'Lấy danh sách sản phẩm thành công!'
       })
     }
