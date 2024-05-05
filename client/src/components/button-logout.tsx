@@ -13,13 +13,13 @@ export default function ButtonLogout() {
   const handleLogout = async () => {
     try {
       await authApiRequest.logoutFromNextClientToNextServer()
-      router.push('/login')
+      router.push('/home/login')
     } catch (error) {
       handleErrorApi({
         error
       })
       authApiRequest.logoutFromNextClientToNextServer(true).then((res) => {
-        router.push(`/login?redirectFrom=${pathname}`)
+        router.push(`/home/login?redirectFrom=${pathname}`)
       })
     } finally {
       router.refresh()

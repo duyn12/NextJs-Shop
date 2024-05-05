@@ -146,7 +146,7 @@ const request = async <Response>(
           clientSessionToken.value = ''
           clientSessionToken.expiresAt = new Date().toISOString()
           clientLogoutRequest = null
-          location.href = '/login'
+          location.href = '/home/login'
         }
       } else {
         const sessionToken = (options?.headers as any)?.Authorization.split(

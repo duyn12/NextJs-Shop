@@ -18,6 +18,15 @@ export const ProductSchema = z.object({
   createdAt: z.date(),
   updatedAt: z.date()
 })
+export const UserSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  price: z.number(),
+  description: z.string(),
+  image: z.string(),
+  createdAt: z.date(),
+  updatedAt: z.date()
+})
 
 export const ProductRes = z.object({
   data: ProductSchema,
@@ -39,3 +48,4 @@ export const ProductParams = z.object({
   id: z.coerce.number()
 })
 export type ProductParamsType = z.TypeOf<typeof ProductParams>
+

@@ -45,7 +45,7 @@ const LoginForm = () => {
       toast({
         description: result.payload.message
       })
-      router.push('/me')
+      router.push('/admin/me')
       router.refresh()
     } catch (error: any) {
       handleErrorApi({
@@ -70,7 +70,7 @@ const LoginForm = () => {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder='shadcn' type='email' {...field} />
+                <Input placeholder='abc@gmail.com' type='email' {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -83,7 +83,7 @@ const LoginForm = () => {
             <FormItem>
               <FormLabel>Mật khẩu</FormLabel>
               <FormControl>
-                <Input placeholder='shadcn' type='password' {...field} />
+                <Input placeholder='Mật khẩu' type='password' {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
