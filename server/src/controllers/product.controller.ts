@@ -1,10 +1,15 @@
 import prisma from '@/database'
+<<<<<<< HEAD
 import {
   ProductSchema,
   CreateProductBodyType,
   UpdateProductBodyType,
   SearchPageAndSortingType
 } from '@/schemaValidations/product.schema'
+=======
+import { ProductDTO } from '@/models/productDTO.model';
+import { ProductSchema, CreateProductBodyType, UpdateProductBodyType, SearchPageAndSortingType } from '@/schemaValidations/product.schema'
+>>>>>>> 8ccc6ce7a66995540093f9bdfede56b276eddfd4
 
 export const getProductList = async (data: SearchPageAndSortingType) => {
   const offset = (data.skipCount - 1) * data.maxResultCount
@@ -37,27 +42,61 @@ export const getProductList = async (data: SearchPageAndSortingType) => {
   return validatedProducts
 }
 
-export const getProductDetail = (id: number) => {
-  return prisma.product.findUniqueOrThrow({
+export const getProductDetail = async (id: number) => {
+  const productEntity = await prisma.product.findUniqueOrThrow({
     where: {
       id
-    }
-  })
+    },
+    include: { category: true},
+  });
+  return new ProductDTO(
+    productEntity.id,
+    productEntity.name,
+    productEntity.price,
+    productEntity.description,
+    productEntity.categoryId,
+    productEntity.category.name,
+    productEntity.img,
+    productEntity.createdAt,
+    productEntity.updatedAt
+  )
 }
 
-export const createProduct = (data: CreateProductBodyType) => {
-  return prisma.product.create({
+export const createProduct = async (data: CreateProductBodyType) => {
+  const productEntity = await prisma.product.create({
     data
   })
+  return new ProductDTO(
+    productEntity.id,
+    productEntity.name,
+    productEntity.price,
+    productEntity.description,
+    productEntity.categoryId,
+    "null",
+    productEntity.img,
+    productEntity.createdAt,
+    productEntity.updatedAt
+  )
 }
 
-export const updateProduct = (id: number, data: UpdateProductBodyType) => {
-  return prisma.product.update({
+export const updateProduct = async (id: number, data: UpdateProductBodyType) => {
+  const productEntity = await prisma.product.update({
     where: {
       id
     },
     data
   })
+  return new ProductDTO(
+    productEntity.id,
+    productEntity.name,
+    productEntity.price,
+    productEntity.description,
+    productEntity.categoryId,
+    "null",
+    productEntity.img,
+    productEntity.createdAt,
+    productEntity.updatedAt
+  )
 }
 
 export const deleteProduct = (id: number) => {
