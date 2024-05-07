@@ -49,7 +49,7 @@ const RegisterForm = () => {
       toast({
         description: result.payload.message
       })
-      router.push('/me')
+      router.push('/home/me')
     } catch (error: any) {
       handleErrorApi({
         error,
@@ -118,8 +118,8 @@ const RegisterForm = () => {
             </FormItem>
           )}
         />
-        <Button type='submit' className='!mt-8 w-full'>
-          Đăng ký
+        <Button type='submit' className='!mt-8 w-full btn-custom'>
+          <span>Đăng ký</span>
         </Button>
       </form>
     </Form>

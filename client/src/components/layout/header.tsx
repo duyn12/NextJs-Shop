@@ -1,6 +1,6 @@
 import { ModeToggle } from "../mode-toggle";
 import ButtonLogout from "@/components/button-logout";
-import { Suspense } from 'react'
+import { Suspense } from "react";
 import Link from "next/link";
 import {
   DropdownMenu,
@@ -15,7 +15,7 @@ import { Button } from "../ui/button";
 import SearchInput from "../Search-input";
 import { AccountResType } from "@/schemaValidations/account.schema";
 function SearchBarFallback() {
-  return <>placeholder</>
+  return <>placeholder</>;
 }
 export default async function Header({
   user,
@@ -23,29 +23,41 @@ export default async function Header({
   user: AccountResType["data"] | null;
 }) {
   return (
-    <header className="fixed w-full bg-white top-0 z-50 shadow">
-      <div className="container flex items-center justify-between gap-5 h-20">
+    <header className="fixed bg-background w-full top-0 z-50 shadow">
+      <div className="container w-full flex items-center justify-between gap-5 h-20">
         <Link href="/" className="text-3xl text-red-800 font-bold">
           REX-SHOP
         </Link>
-        <div className="hidden text-black font-bold lg:flex lg:flex-1 gap-x-7 justify-center">
+        <div className="hidden font-bold lg:flex lg:flex-1 gap-x-7 justify-center">
+          
           <Link href="/home">Trang chủ</Link>
           <Link href="/home/products">Sản phẩm</Link>
           <Link href="/">Hỗ trợ</Link>
+          
         </div>
         <Suspense fallback={<SearchBarFallback />}>
-        <SearchInput />
+          <SearchInput />
         </Suspense>
-        
-        <ul className="border-l pl-4 flex gap-2">
+
+        <ul className="border-l pl-4 flex gap-4">
           <ModeToggle />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Link href="/home/login" className="">
-                <Button variant="ghost" size="icon" className="text-black">
-                  <CircleUserRound />
-                </Button>
-              </Link>
+              {!user ? (
+                <>
+                  <Link href="/home/login" className="">
+                    <Button variant="ghost" size="icon">
+                      <CircleUserRound />
+                    </Button>
+                  </Link> 
+                </>
+              ) : (
+                <>
+                  <Button variant="ghost" size="icon">
+                    <CircleUserRound />
+                  </Button>
+                </>
+              )}
             </DropdownMenuTrigger>
             {user ? (
               <>
@@ -65,7 +77,7 @@ export default async function Header({
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem className="w-52 flex justify-center">
+                  <DropdownMenuItem className="flex justify-center">
                     <ButtonLogout />
                   </DropdownMenuItem>
                 </DropdownMenuContent>

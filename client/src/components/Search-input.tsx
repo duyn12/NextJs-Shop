@@ -31,7 +31,7 @@ const SearchInput = () => {
           <input
                 value={searchQuery || ""}
                 onChange={(event) => setSearchQuery(event.target.value)}
-                className="px-5 py-1  sm:py-3 flex-1 text-zinc-200 bg-zinc-800 focus:bg-black rounded-full focus:outline-none focus:ring-[1px] focus:ring-green-700 placeholder:text-zinc-400"
+                className="px-5 py-1  sm:py-3 flex-1 text-zinc-200 bg-zinc-800 focus:bg-black rounded-full focus:outline-none focus:ring-[1px] focus:ring-red-800 placeholder:text-zinc-400"
                 placeholder="Tìm kiếm ?"
             />
         </div>

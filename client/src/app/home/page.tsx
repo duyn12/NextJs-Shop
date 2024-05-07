@@ -2,7 +2,6 @@
 import HeroBanner from '@/components/banner'
 import HomeContainer from '@/components/home-container'
 import ProductNew from '@/components/layout/product-new'
-import Header from '@/components/layout/header'
 import { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'REX SHOP',
@@ -16,7 +15,6 @@ export default function Home() {
   // }
   return (
     <main>
-      <Header user={null}/>
         <HeroBanner />
         <HomeContainer />
         <ProductNew />

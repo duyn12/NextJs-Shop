@@ -11,9 +11,6 @@ import Link from "next/link";
 import Image from "next/image";
 import ButtonAddCart from "../products/button-add-cart";
 const ProductNew = async () => {
-  const cookieStore = cookies();
-  const sessionToken = cookieStore.get("sessionToken");
-  const isAuthenticated = Boolean(sessionToken);
   const { payload } = await productApiRequest.getList();
   const productList = payload.data;
   return (
@@ -59,8 +56,8 @@ const ProductNew = async () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+        <CarouselPrevious className="custombuttonPrevious" />
+        <CarouselNext className="custombuttonNext" />
       </Carousel>
     </div>
   );

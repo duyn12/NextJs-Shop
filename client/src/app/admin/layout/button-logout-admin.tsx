@@ -27,8 +27,7 @@ export default function ButtonLogoutAdmin() {
     }
   };
   return (
-    <Button onClick={handleLogout} variant="destructive" className="w-full mt-[160%]">
-      {" "}
+    <Button onClick={handleLogout} variant="destructive" className="w-full mt-4">
       <LogOut className="w-4 h-4 mr-2" />
       Đăng xuất
     </Button>

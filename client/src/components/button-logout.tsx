@@ -26,8 +26,8 @@ export default function ButtonLogout() {
     }
   }
   return (
-    <Button size={'sm'} onClick={handleLogout}>
-      Đăng xuất
+    <Button size={'sm'} onClick={handleLogout} className='btn-custom w-full'>
+      <span>Đăng xuất</span>
     </Button>
   )
 }
