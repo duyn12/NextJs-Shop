@@ -27,6 +27,7 @@ export default async function ProductAdmin() {
   const { payload } = await productApiRequest.getList();
   const productList = payload.data;
   let totalPrice = 0;
+
   return (
     <div className="container">
       <h2 className="text-2xl font-bold mb-6">Quản lý sản phẩm</h2>
@@ -41,8 +42,9 @@ export default async function ProductAdmin() {
               <TableRow>
                 <TableHead>Sản phẩm</TableHead>
                 <TableHead>Số lượng</TableHead>
-                <TableHead className="text-right">Giá</TableHead>
-                <TableHead className="text-right">Thao tác</TableHead>
+                <TableHead className="text-center">Giá</TableHead>
+                <TableHead className="text-center">Loại</TableHead>
+                <TableHead className="text-center">Thao tác</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -54,7 +56,7 @@ export default async function ProductAdmin() {
                     <TableCell className="font-medium">
                       <div className="flex space-x-4">
                         <Image
-                          src={product.image}
+                          src={product.img}
                           alt={product.name}
                           width={120}
                           height={60}
@@ -68,12 +70,15 @@ export default async function ProductAdmin() {
                         </div>
                       </div>
                     </TableCell>
-                    <TableCell>1</TableCell>
-                    <TableCell className="text-right">
+                    <TableCell>{product.quantity}</TableCell>
+                    <TableCell className="text-center">
                       {product.price}đ
                     </TableCell>
+                    <TableCell className="text-center">
+                      {product.categoryName}
+                    </TableCell>
                     <TableCell>
-                     <div className="flex space-x-2 items-start">
+                     <div className="space-x-2 text-center">
                        <Link href={`/admin/products/${product.id}/edit`}>
                          <Button variant={"outline"}>Edit</Button>
                        </Link>

@@ -219,3 +219,22 @@ span {
   font-weight: 700;
   font-size: 14px;
 }
+.status-dang-xu-ly {
+  font-weight: bold;
+  color: #97f14e; /* Light green for "Đang xử lý" */
+}
+
+.status-tam-giu {
+  font-weight: bold;
+  color: #fece1f; /* Khaki for "Tạm giữ" */
+}
+
+.status-dang-giao-hang {
+  font-weight: bold;
+  color: #87CEEB; /* Sky blue for "Đang giao hàng" */
+}
+
+.status-that-bai {
+  font-weight: bold;
+  color: #f82d2d; /* Orange for "Thất bại" */
+}

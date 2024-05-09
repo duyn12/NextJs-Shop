@@ -4,7 +4,9 @@ export const CreateProductBody = z.object({
   name: z.string().min(1).max(256),
   price: z.coerce.number().positive(),
   description: z.string().max(10000),
-  image: z.string().url()
+  img: z.string().url(),
+  quantity: z.coerce.number().positive(),
+  categoryId: z.number()
 })
 
 export type CreateProductBodyType = z.TypeOf<typeof CreateProductBody>
@@ -14,16 +16,10 @@ export const ProductSchema = z.object({
   name: z.string(),
   price: z.number(),
   description: z.string(),
-  image: z.string(),
-  createdAt: z.date(),
-  updatedAt: z.date()
-})
-export const UserSchema = z.object({
-  id: z.number(),
-  name: z.string(),
-  price: z.number(),
-  description: z.string(),
-  image: z.string(),
+  categoryId: z.number(),
+  categoryName: z.string(),
+  quantity: z.coerce.number().positive(),
+  img: z.string().url(),
   createdAt: z.date(),
   updatedAt: z.date()
 })
@@ -37,6 +33,7 @@ export type ProductResType = z.TypeOf<typeof ProductRes>
 
 export const ProductListRes = z.object({
   data: z.array(ProductSchema),
+  totalCount: z.number(),
   message: z.string()
 })
 

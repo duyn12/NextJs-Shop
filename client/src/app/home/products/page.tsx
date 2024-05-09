@@ -7,7 +7,6 @@ import ProductBreadcrumb from "@/components/products/products-breadcrum";
 import ProductCategory from "@/components/products/products-category";
 import ButtonAddCart from "@/components/products/button-add-cart";
 import { Metadata } from "next";
-import DeleteProduct from "./_components/delete-product";
 
 export const metadata: Metadata = {
   title: 'Tất cả sản phẩm',
@@ -37,7 +36,7 @@ export default async function ProductListPage() {
               <div className="h-[300px] relative overflow-hidden text-center ">
                 <Link href={`/home/products/${product.id}`}>
                   <Image
-                    src={product.image}
+                    src={product.img}
                     alt={product.name}
                     width={330}
                     height={250}
@@ -56,7 +55,7 @@ export default async function ProductListPage() {
                 </Link>
                 <span className="mt-2 text-lg">{product.price} đ</span>
               </div>
-
+{/* 
               <div className="flex mr-4 justify-end">
                 {isAuthenticated && !(
                   <div className="flex space-x-2 items-start">
@@ -66,7 +65,7 @@ export default async function ProductListPage() {
                     <DeleteProduct product={product} />
                   </div>
                 )}
-              </div>
+              </div> */}
             </div>
           ))}
         </div>

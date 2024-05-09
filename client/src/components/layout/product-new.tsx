@@ -35,7 +35,7 @@ const ProductNew = async () => {
                 <div className="h-[300px] relative overflow-hidden text-center ">
                   <Link href={`/home/products/${product.id}`}>
                     <Image
-                      src={product.image}
+                      src={product.img}
                       alt={product.name}
                       width={330}
                       height={250}
@@ -48,7 +48,9 @@ const ProductNew = async () => {
                   <Link href={`/home/products/${product.id}`}>
                     <h2 className="text-xl font-bold min-h-[60px] line-clamp-2">
                       {product.name}
+                     
                     </h2>
+                    {/* <p> {product.description}</p> */}
                   </Link>
                   <span className="mt-2 text-lg">{product.price} đ</span>
                 </div>
@@ -56,8 +58,8 @@ const ProductNew = async () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="custombuttonPrevious" />
-        <CarouselNext className="custombuttonNext" />
+        <CarouselPrevious/>
+        <CarouselNext />
       </Carousel>
     </div>
   );

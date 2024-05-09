@@ -1,8 +1,4 @@
 import productApiRequest from "@/apiRequests/product";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { cookies } from "next/headers";
-import ProductBreadcrumb from "@/components/products/products-breadcrum";
 import { Metadata } from "next";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { AccountResType } from "@/schemaValidations/account.schema";
