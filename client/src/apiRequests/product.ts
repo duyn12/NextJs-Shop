@@ -12,6 +12,10 @@ const productApiRequest = {
     http.get<ProductListResType>('/products', {
       cache: 'no-store'
     }),
+  getOrder: (id: number) =>
+      http.get<ProductResType>(`/admin/order/${id}`, {
+        cache: 'no-store'
+      }),
   getDetail: (id: number) =>
     http.get<ProductResType>(`/products/${id}`, {
       cache: 'no-store'

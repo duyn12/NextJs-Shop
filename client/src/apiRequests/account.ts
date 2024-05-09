@@ -5,6 +5,10 @@ import {
 } from '@/schemaValidations/account.schema'
 
 const accountApiRequest = {
+  getList: () =>
+    http.get<AccountResType>('/account', {
+      cache: 'no-store'
+    }),
   me: (sessionToken: string) =>
     http.get<AccountResType>('account/me', {
       headers: {

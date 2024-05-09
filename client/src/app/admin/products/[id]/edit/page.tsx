@@ -17,7 +17,7 @@ export async function generateMetadata(
   const { payload } = await getDetail(Number(params.id))
   const product = payload.data
   return {
-    title: 'Edit sản phẩm: ' + product.name,
+    title: 'Sửa sản phẩm: ' + product.name,
     description: product.description
   }
 }

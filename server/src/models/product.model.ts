@@ -7,8 +7,8 @@ export interface Product {
   name: string;
   price: number;
   categoryId: number;
-  img: string;
   quantity: number;
+  img: string;
   description: string;
   createdAt: Date;
   updatedAt: Date;

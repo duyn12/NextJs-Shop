@@ -25,7 +25,7 @@ export default async function Header({
   return (
     <header className="fixed bg-background w-full top-0 z-50 shadow">
       <div className="container w-full flex items-center justify-between gap-5 h-20">
-        <Link href="/" className="text-3xl text-red-800 font-bold">
+        <Link href="/" className="logo text-3xl text-red-800 font-bold">
           REX-SHOP
         </Link>
         <div className="hidden font-bold lg:flex lg:flex-1 gap-x-7 justify-center">
