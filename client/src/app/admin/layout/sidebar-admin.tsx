@@ -59,7 +59,7 @@ const AdminSidebar = () => {
           </li>
           <li>
             <Link
-              href="/admin/products"
+              href="/admin/order"
               className="flex items-center rounded-lg px-3 py-2 text-slate-900 hover:bg-slate-100 dark:text-white dark:hover:bg-slate-700"
             >
               <BarChart4 className="w-5 h-5" />

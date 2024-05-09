@@ -26,6 +26,7 @@ export const ProductSchema = z.object({
   description: z.string(),
   categoryId: z.number(),
   categoryName: z.string(),
+  quantity: z.number(),
   img: z.string().url(),
   createdAt: z.date(),
   updatedAt: z.date()

@@ -1,15 +1,7 @@
 import prisma from '@/database'
-<<<<<<< HEAD
-import {
-  ProductSchema,
-  CreateProductBodyType,
-  UpdateProductBodyType,
-  SearchPageAndSortingType
-} from '@/schemaValidations/product.schema'
-=======
 import { ProductDTO } from '@/models/productDTO.model';
 import { ProductSchema, CreateProductBodyType, UpdateProductBodyType, SearchPageAndSortingType } from '@/schemaValidations/product.schema'
->>>>>>> 8ccc6ce7a66995540093f9bdfede56b276eddfd4
+
 
 export const getProductList = async (data: SearchPageAndSortingType) => {
   const offset = (data.skipCount - 1) * data.maxResultCount
@@ -32,6 +24,7 @@ export const getProductList = async (data: SearchPageAndSortingType) => {
     description: product.description,
     categoryId: product.categoryId,
     categoryName: product.category.name,
+    quantity: product.quantity,
     img: product.img,
     createdAt: product.createdAt,
     updatedAt: product.updatedAt
@@ -56,6 +49,7 @@ export const getProductDetail = async (id: number) => {
     productEntity.description,
     productEntity.categoryId,
     productEntity.category.name,
+    productEntity.quantity,
     productEntity.img,
     productEntity.createdAt,
     productEntity.updatedAt
@@ -73,6 +67,7 @@ export const createProduct = async (data: CreateProductBodyType) => {
     productEntity.description,
     productEntity.categoryId,
     "null",
+    productEntity.quantity,
     productEntity.img,
     productEntity.createdAt,
     productEntity.updatedAt
@@ -93,6 +88,7 @@ export const updateProduct = async (id: number, data: UpdateProductBodyType) => 
     productEntity.description,
     productEntity.categoryId,
     "null",
+    productEntity.quantity,
     productEntity.img,
     productEntity.createdAt,
     productEntity.updatedAt

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 const AdminHeader = () => {
   return (
     <div className="flex">
-
+      
     </div>
       
   );

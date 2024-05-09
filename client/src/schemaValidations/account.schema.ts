@@ -1,15 +1,14 @@
 import z from 'zod'
-
-export const AccountRes = z
-  .object({
-    data: z.object({
-      id: z.number(),
-      name: z.string(),
-      email: z.string()
-    }),
+export const AccountSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  email: z.string()
+})
+export const AccountRes = z.object({
+    data: AccountSchema,
     message: z.string()
-  })
-  .strict()
+})
+.strict()
 
 export type AccountResType = z.TypeOf<typeof AccountRes>
 
