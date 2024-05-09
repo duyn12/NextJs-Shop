@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -12,11 +12,21 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-} from "@tanstack/react-table"
-import { ArrowUpDown, ChevronDown, CirclePlus, EllipsisVertical, MoreHorizontal } from "lucide-react"
-import { toast, useToast } from "@/components/ui/use-toast"
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
+} from "@tanstack/react-table";
+import { ArrowUpDown, ChevronDown, EllipsisVertical } from "lucide-react";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import { toast, useToast } from "@/components/ui/use-toast";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -25,8 +35,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -34,8 +44,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import Link from "next/link"
+} from "@/components/ui/table";
+import Link from "next/link";
 import {
   Select,
   SelectContent,
@@ -44,7 +54,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 const data: Payment[] = [
   {
     id: "m5gr84i9",
@@ -65,7 +75,14 @@ const data: Payment[] = [
     amount: 837000,
     status: "Đang giao hàng",
     email: "Monserrat44@gmail.com",
-    product: ["Product1", "Product2", "Product3", "Product4", "Product5", "Product6"],
+    product: [
+      "Product1",
+      "Product2",
+      "Product3",
+      "Product4",
+      "Product5",
+      "Product6",
+    ],
   },
   {
     id: "5kma53ae",
@@ -130,46 +147,46 @@ const data: Payment[] = [
     email: "carmella@hotmail.com",
     product: ["Product1", "Product2", "Product3"],
   },
-]
+];
 type Status = "Đang xử lý" | "Tạm giữ" | "Đang giao hàng" | "Thất bại";
 export type Payment = {
-  id: string
-  amount: number
-  status: Status
-  email: string
-  product: string[]
-}
+  id: string;
+  amount: number;
+  status: Status;
+  email: string;
+  product: string[];
+};
 const getStatusClassName = (status: Status): string => {
   switch (status) {
     case "Đang xử lý":
-      return 'status-dang-xu-ly';
+      return "status-dang-xu-ly";
     case "Tạm giữ":
-      return 'status-tam-giu';
+      return "status-tam-giu";
     case "Đang giao hàng":
-      return 'status-dang-giao-hang';
+      return "status-dang-giao-hang";
     case "Thất bại":
-      return 'status-that-bai';
+      return "status-that-bai";
     default:
-      return ''; // Default case to handle any potential oversight
+      return ""; // Default case to handle any potential oversight
   }
 };
 const StatusCell = ({ status }: { status: Status }) => (
-  <div className={`capitalize ${getStatusClassName(status)}`}>
-    {status}
-  </div>
+  <div className={`capitalize ${getStatusClassName(status)}`}>{status}</div>
 );
 // Coppy mã đơn hàng
 function handleButtonClick(paymentId: string) {
-
-  navigator.clipboard.writeText(paymentId).then(() => {
-    // Optionally, you can add a callback here if you want to notify the user that the ID has been copied successfully.
-    toast({
-      description: "Đã sao chép mã đặt hàng!",
+  navigator.clipboard
+    .writeText(paymentId)
+    .then(() => {
+      // Optionally, you can add a callback here if you want to notify the user that the ID has been copied successfully.
+      toast({
+        description: "Đã sao chép mã đặt hàng!",
+      });
+    })
+    .catch((err) => {
+      // Handle possible errors
+      console.error("Could not copy text: ", err);
     });
-  }).catch(err => {
-    // Handle possible errors
-    console.error('Could not copy text: ', err);
-  });
 }
 
 export const columns: ColumnDef<Payment>[] = [
@@ -198,14 +215,18 @@ export const columns: ColumnDef<Payment>[] = [
   {
     accessorKey: "id",
     header: "Mã Đặt hàng",
-    cell: ({ row }: { row: { getValue: (key: string) => any } }) => 
-      <div className="font-medium text-slate-400">#<Link href={"/admin/order/id"}>{row.getValue("id")}</Link> </div>
+    cell: ({ row }: { row: { getValue: (key: string) => any } }) => (
+      <div className="font-medium text-slate-400">
+        #<Link href={"/admin/order/id"}>{row.getValue("id")}</Link>{" "}
+      </div>
+    ),
   },
   {
     accessorKey: "status",
     header: "Tình trạng",
-    cell: ({ row }: { row: { getValue: (key: string) => any } }) => 
+    cell: ({ row }: { row: { getValue: (key: string) => any } }) => (
       <StatusCell status={row.getValue("status") as Status} />
+    ),
   },
   {
     accessorKey: "email",
@@ -218,7 +239,7 @@ export const columns: ColumnDef<Payment>[] = [
           Email
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
     cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
   },
@@ -228,41 +249,48 @@ export const columns: ColumnDef<Payment>[] = [
     cell: ({ row }) => {
       // Assert the type of products to be string[]
       const products = row.getValue("product") as string[];
-  
+
       // Determine the number of additional products beyond the first two
       const additionalProducts = products.length - 2;
-  
+
       return (
         <div className="capitalize">
-          {products.length > 2 ? `${products.slice(0, 2).join(", ")}...` : products.join(", ")}
-          <Button className={`w-8 h-8 text-red-500 ${additionalProducts > 0 ? '' : 'invisible'}`} variant='ghost'>
+          {products.length > 2
+            ? `${products.slice(0, 2).join(", ")}...`
+            : products.join(", ")}
+          <Button
+            className={`w-8 h-8 text-red-500 ${
+              additionalProducts > 0 ? "" : "invisible"
+            }`}
+            variant="ghost"
+          >
             +{Math.max(0, additionalProducts)}
           </Button>
         </div>
       );
     },
-  },    
+  },
   {
     accessorKey: "amount",
     header: () => <div className="text-right">Tổng</div>,
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"))
-    
+      const amount = parseFloat(row.getValue("amount"));
+
       // Format the amount as Vietnamese Dong (VNĐ)
       const formatted = new Intl.NumberFormat("vi", {
         style: "currency",
         currency: "VND",
-      }).format(amount)
-    
-      return <div className="text-right font-medium">{formatted}</div>
+      }).format(amount);
+
+      return <div className="text-right font-medium">{formatted}</div>;
     },
   },
   {
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original
- 
+      const payment = row.original;
+
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -272,29 +300,34 @@ export const columns: ColumnDef<Payment>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => handleButtonClick(payment.id)}
-            >
+            <DropdownMenuItem onClick={() => handleButtonClick(payment.id)}>
               Sao chép mã đặt hàng
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Xem đơn hàng</DropdownMenuItem>
+            <DropdownMenuItem>
+              <Drawer>
+                <DrawerTrigger>
+                  Xem
+                </DrawerTrigger>
+              </Drawer>
+            </DropdownMenuItem>
             <DropdownMenuItem>Xoá đơn hàng</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      )
+        
+      );
     },
   },
-]
+];
 
 export default function DataTableDemo() {
-  const [sorting, setSorting] = React.useState<SortingState>([])
+  const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
-  )
+  );
   const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({})
-  const [rowSelection, setRowSelection] = React.useState({})
+    React.useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useReactTable({
     data,
@@ -313,29 +346,28 @@ export default function DataTableDemo() {
       columnVisibility,
       rowSelection,
     },
-  })
+  });
 
   return (
     <div className="w-full px-4">
       <div className="flex justify-start py-4 gap-2">
-      <Select>
-      <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Hành động" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          <SelectLabel>Hành động</SelectLabel>
-          <SelectItem value="edit">Chỉnh sửa</SelectItem>
-          <SelectItem value="view">Xem đơn hàng</SelectItem>
-          <SelectItem value="delete">Xoá</SelectItem>
-        </SelectGroup>
-      </SelectContent>
-    </Select>
+        <Select>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Hành động" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Hành động</SelectLabel>
+              <SelectItem value="edit">Chỉnh sửa</SelectItem>
+              <SelectItem value="view">Xem đơn hàng</SelectItem>
+              <SelectItem value="delete">Xoá</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
         <Link href={"/admin/order/id"}>
           <Button variant="secondary">Áp dụng</Button>
         </Link>
-
-    </div>
+      </div>
       <div className="flex items-center py-4">
         <Input
           placeholder="Tìm kiếm emails..."
@@ -367,7 +399,7 @@ export default function DataTableDemo() {
                   >
                     {column.id}
                   </DropdownMenuCheckboxItem>
-                )
+                );
               })}
           </DropdownMenuContent>
         </DropdownMenu>
@@ -387,7 +419,7 @@ export default function DataTableDemo() {
                             header.getContext()
                           )}
                     </TableHead>
-                  )
+                  );
                 })}
               </TableRow>
             ))}
@@ -400,7 +432,7 @@ export default function DataTableDemo() {
                   data-state={row.getIsSelected() && "đã chọn."}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} >
+                    <TableCell key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -442,11 +474,10 @@ export default function DataTableDemo() {
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-           Tiếp tục
+            Tiếp tục
           </Button>
         </div>
       </div>
-      
     </div>
-  )
+  );
 }
