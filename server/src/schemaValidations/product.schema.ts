@@ -13,7 +13,7 @@ export const CreateProductBody = z.object({
   price: z.number().positive(),
   description: z.string().max(10000),
   img: z.string().url(),
-  quantity: z.number(),
+  quantity: z.number().positive(),
   categoryId: z.number()
 })
 
@@ -26,6 +26,7 @@ export const ProductSchema = z.object({
   description: z.string(),
   categoryId: z.number(),
   categoryName: z.string(),
+  quantity: z.number().positive(),
   img: z.string().url(),
   createdAt: z.date(),
   updatedAt: z.date()

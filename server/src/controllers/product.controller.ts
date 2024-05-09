@@ -1,15 +1,7 @@
 import prisma from '@/database'
-<<<<<<< HEAD
-import {
-  ProductSchema,
-  CreateProductBodyType,
-  UpdateProductBodyType,
-  SearchPageAndSortingType
-} from '@/schemaValidations/product.schema'
-=======
+
 import { ProductDTO } from '@/models/productDTO.model';
 import { ProductSchema, CreateProductBodyType, UpdateProductBodyType, SearchPageAndSortingType } from '@/schemaValidations/product.schema'
->>>>>>> 8ccc6ce7a66995540093f9bdfede56b276eddfd4
 
 export const getProductList = async (data: SearchPageAndSortingType) => {
   const offset = (data.skipCount - 1) * data.maxResultCount
