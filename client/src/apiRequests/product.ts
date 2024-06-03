@@ -8,10 +8,7 @@ import {
 } from '@/schemaValidations/product.schema'
 
 const productApiRequest = {
-  getList: () =>
-    http.get<ProductListResType>('/products', {
-      cache: 'no-store'
-    }),
+  getList: () => http.get<ProductListResType>('/products'),
   getOrder: (id: number) =>
       http.get<ProductResType>(`/admin/order/${id}`, {
         cache: 'no-store'

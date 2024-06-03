@@ -63,7 +63,7 @@ const AdminSidebar = () => {
               className="flex items-center rounded-lg px-3 py-2 text-slate-900 hover:bg-slate-100 dark:text-white dark:hover:bg-slate-700"
             >
               <BarChart4 className="w-5 h-5" />
-              <span className="text-sidebar">Analytics</span>
+              <span className="text-sidebar">Đơn hàng</span>
             </Link>
           </li>
           <li>
@@ -137,14 +137,6 @@ const AdminSidebar = () => {
           <ButtonLogoutAdmin />
         </div>
       </div>
-      {/* <div className="h-full px-3 py-4 bg-zinc-200 dark:bg-gray-800">
-              <Button variant="ghost" asChild><Link href="/admin" className="w-full my-2"><LayoutDashboard className="w-4 h-4 mr-2"/>  Trang chủ</Link></Button>
-              <Button variant="ghost" asChild><Link href="/admin" className="w-full my-2"><LayoutDashboard className="w-4 h-4 mr-2"/>  Dashboard</Link></Button>
-              <Button variant="ghost" asChild><Link href="/admin/products" className="w-full my-2"> <Package className="w-4 h-4 mr-2"/>Sản phẩm</Link></Button>
-              <Button variant="ghost" asChild><Link href="/admin/" className="w-full my-2"> <ShoppingBag className="w-4 h-4 mr-2"/>Đơn hàng</Link></Button>
-              <Button variant="ghost" asChild><Link href="/admin/user" className="w-full my-2"> <User className="w-4 h-4 mr-2"/>Người dùng</Link></Button>
-              <ButtonLogoutAdmin />
-          </div> */}
     </aside>
   );
 };

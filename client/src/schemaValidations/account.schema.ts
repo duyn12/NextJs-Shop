@@ -2,7 +2,8 @@ import z from 'zod'
 export const AccountSchema = z.object({
   id: z.number(),
   name: z.string(),
-  email: z.string()
+  email: z.string(),
+  address: z.string(),
 })
 export const AccountRes = z.object({
     data: AccountSchema,
@@ -13,7 +14,8 @@ export const AccountRes = z.object({
 export type AccountResType = z.TypeOf<typeof AccountRes>
 
 export const UpdateMeBody = z.object({
-  name: z.string().trim().min(2).max(256)
+  name: z.string().trim().min(2).max(256),
+  address: z.string(),
 })
 
 export type UpdateMeBodyType = z.TypeOf<typeof UpdateMeBody>

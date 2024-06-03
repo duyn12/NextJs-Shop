@@ -14,6 +14,7 @@ const ProductNew = async () => {
   const { payload } = await productApiRequest.getList();
   const productList = payload.data;
   return (
+    <section id="section2" className="cd-section">
     <div className="container py-20">
     <h2 className="flex justify-center text-2xl uppercase mb-8">Tất cả sản phẩm</h2>
       <Carousel
@@ -44,15 +45,13 @@ const ProductNew = async () => {
                   </Link>
                    <ButtonAddCart />
                 </div>
-                <div className="text-center p-4">
+                <div className="text-center p-4 min-h-[160px]">
                   <Link href={`/home/products/${product.id}`}>
                     <h2 className="text-xl font-bold min-h-[60px] line-clamp-2">
                       {product.name}
-                     
                     </h2>
-                    {/* <p> {product.description}</p> */}
+                    <p className=" font-light line-clamp-2"> {product.description}</p>
                   </Link>
-                  <span className="mt-2 text-lg">{product.price} đ</span>
                 </div>
               </div>
             </CarouselItem>
@@ -62,6 +61,7 @@ const ProductNew = async () => {
         <CarouselNext />
       </Carousel>
     </div>
+    </section>
   );
 };
 

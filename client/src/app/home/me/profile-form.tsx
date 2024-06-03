@@ -32,10 +32,16 @@ const ProfileForm = ({ profile }: { profile: Profile }) => {
   const form = useForm<UpdateMeBodyType>({
     resolver: zodResolver(UpdateMeBody),
     defaultValues: {
-      name: profile.name
+      name: profile.name,
+      address: "",
     }
   })
-
+  // const form = useForm<z.infer<typeof formSchema>>({
+  //   resolver: zodResolver(formSchema),
+  //   defaultValues: {
+  //     username: "",
+  //   },
+  // })
   // 2. Define a submit handler.
   async function onSubmit(values: UpdateMeBodyType) {
     if (loading) return
@@ -86,8 +92,21 @@ const ProfileForm = ({ profile }: { profile: Profile }) => {
             </FormItem>
           )}
         />
-        <Button type='submit' className='!mt-8 w-full'>
-          Cập nhật
+        <FormField
+          control={form.control}
+          name='address'
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Địa chỉ</FormLabel>
+              <FormControl>
+                <Input placeholder='Địa chỉ' type='text' {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type='submit' className='!mt-8 btn-custom w-48'>
+          <span>Cập nhật</span>
         </Button>
       </form>
     </Form>

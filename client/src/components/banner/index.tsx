@@ -11,13 +11,14 @@ import {
 
 const HeroBanner = () => {
   const imageUrls = [
+    "https://storage-asset.msi.com/global/picture/banner/banner_171521554311e19f0f74fc688b13148510f55e9f3f.jpeg",
     "https://storage-asset.msi.com/global/picture/banner/banner_170445163774a272972e56c403d9e3c314dd97a0df.jpeg",
     "https://storage-asset.msi.com/global/picture/banner/banner_1695693289ebeb1f0bb341626b2d0bf870d3cb9254.jpeg",
     "https://storage-asset.msi.com/global/picture/banner/banner_170445142354207818e5028f0c1f969f8e17c9fbac.jpeg",
   ];
 
   return (
-
+    <section id="section1" className="cd-section">
     <Carousel className="w-full">
         <CarouselContent>
           {imageUrls.map((imageUrl, index) => (
@@ -29,6 +30,7 @@ const HeroBanner = () => {
         <CarouselPrevious className="custombuttonPrevious" />
         <CarouselNext className="custombuttonNext" />
       </Carousel>
+      </section>
   );
 };
 

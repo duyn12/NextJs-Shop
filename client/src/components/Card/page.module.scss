@@ -1,0 +1,110 @@
+.titleContainer {
+  width: 60%;
+  position: sticky;
+  top: 0;
+  height: 40vh;
+  align-items: center;
+  padding: 100px;
+  height: fit-content;
+  h1 {
+    font-size: 6vh;
+    font-weight: bold;
+    font-family: ironstrike, sans-serif;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    color: #1a1a1a;
+  }
+  p {
+    margin-top: 20px;
+    font-weight: bold;
+    font-family: ironstrike, sans-serif;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    color: #3f3f3f;
+  }
+}
+.cardContainer{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0px;
+
+  &:nth-child(even) {
+    margin-left: 100px;
+  }
+
+  .card{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: -25%;
+    height: 400px;
+    width: 350px;
+    padding: 30px;
+    transform-origin: top;
+    z-index: 1;
+    background: #fff;
+    border: 3px solid #000;
+    border-radius: 0;
+    box-shadow: 15px 15px 0 -2.5px #fff, 15px 15px 0 0 #000;
+    h2{
+      font-family: ironstrike, sans-serif;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      color: #1a1a1a;
+      text-transform: uppercase;
+    }
+    .body{
+      display: flex;
+      height: 100%;
+      margin-top: 30px;
+      gap: 50px;
+      .description{
+        width: 100%;
+        position: relative;
+        z-index: 3;
+        .p {
+          font-family: ironstrike, sans-serif;
+          letter-spacing: 2px;
+          margin-bottom: 10px;
+          color: #313131;
+        }
+        span{
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          a{
+            font-size: 12px;
+            text-decoration: underline;
+            cursor: pointer;
+          }
+        }
+      }
+
+      .imageContainer{
+        margin-left: 60px;
+        position: absolute;
+        top: 180px;
+        width: 345px;
+        height: 270px;
+        object-fit: none;
+
+        .inner{
+          display: inline-block;
+      position: relative;
+      transition: 0.2s all ease-in;
+      overflow: hidden;
+          width: 100%;
+          height: 100%;
+        }
+        img{
+          width: 100%;
+
+        }
+      }
+    }
+  }
+
+}
