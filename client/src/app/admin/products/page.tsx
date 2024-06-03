@@ -2,7 +2,6 @@
 import productApiRequest from "@/apiRequests/product";
 import { Metadata } from "next";
 import { Button } from "@/components/ui/button";
-import { cookies } from "next/headers";
 import Image from "next/image";
 import {
   Table,
@@ -21,13 +20,16 @@ export const metadata: Metadata = {
 }
 
 export default async function ProductAdmin() {
-  const cookieStore = cookies();
-  const sessionToken = cookieStore.get("sessionToken");
-  const isAuthenticated = Boolean(sessionToken);
   const { payload } = await productApiRequest.getList();
   const productList = payload.data;
-  let totalPrice = 0;
-
+  // Sét giá VND
+  function formatVND(value: number | bigint) {
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND',
+      maximumFractionDigits: 0, // Omitting decimal values for VND as they are generally not used
+    }).format(value);
+  }
   return (
     <div className="container">
       <h2 className="text-2xl font-bold mb-6">Quản lý sản phẩm</h2>
@@ -48,12 +50,9 @@ export default async function ProductAdmin() {
               </TableRow>
             </TableHeader>
             <TableBody>
-            {productList.map((product) => {
-                // Cập nhật tổng giá trị
-                totalPrice += product.price;
-                return (
+            {productList.map((product) => (
                   <TableRow key={product.id}>
-                    <TableCell className="font-medium">
+                    <TableCell className="font-medium w-[65%]">
                       <div className="flex space-x-4">
                         <Image
                           src={product.img}
@@ -64,7 +63,7 @@ export default async function ProductAdmin() {
                         />
                         <div>
                           <h3 className="text-lg">{product.name}</h3>
-                          <p className="text-xs font-light line-clamp-2">
+                          <p className="text-xs font-light line-clamp-2 w-[80%]">
                             {product.description}
                           </p>
                         </div>
@@ -72,27 +71,27 @@ export default async function ProductAdmin() {
                     </TableCell>
                     <TableCell>{product.quantity}</TableCell>
                     <TableCell className="text-center">
-                      {product.price}đ
+                    {formatVND(product.price)}
                     </TableCell>
                     <TableCell className="text-center">
                       {product.categoryName}
                     </TableCell>
                     <TableCell>
-                     <div className="space-x-2 text-center">
-                       <Link href={`/admin/products/${product.id}/edit`}>
-                         <Button variant={"outline"}>Edit</Button>
+                     <div className="space-x-2 text-center flex">
+                       <Link href={`/admin/products/${product.id}/edit`} >
+                         <Button variant={"outline"} >Edit</Button>
                        </Link>
                        <DeleteProduct product={product} />
                      </div>
                     </TableCell>
                   </TableRow>
-
-                );
-              })}
+               ))}
             </TableBody>
           </Table>
         </div>
+
       </div>
+      
     </div>
   );
 }

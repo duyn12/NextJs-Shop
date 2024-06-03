@@ -26,7 +26,7 @@ export default async function ProductDetail({ params, searchParams }: Props) {
           <ProductBreadcrumb homeElement={undefined} separator={undefined} />
           <div className="lg:w-4/5 mx-auto flex flex-wrap my-8">
             <Image
-              src={product.image}
+              src={product.img}
               alt={product.name}
               width={450}
               height={400}

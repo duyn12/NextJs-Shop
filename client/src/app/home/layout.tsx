@@ -1,16 +1,16 @@
-
+/* eslint-disable @next/next/no-async-client-component */
+"use client";
 import { Inter } from 'next/font/google'
 import { ThemeProvider } from '@/components/theme-provider'
 import '../globals.css'
 import Header from '@/components/layout/header'
 import { Toaster } from '@/components/ui/toaster'
 import AppProvider from '@/app/app-provider'
-import { cookies } from 'next/headers'
 import SlideSession from '@/components/slide-session'
-import accountApiRequest from '@/apiRequests/account'
-import { AccountResType } from '@/schemaValidations/account.schema'
-import Footer from '@/components/layout/footer'
-
+import Footer from "@/components/Footer/Footer2";
+import Intro from "@/components/Footer/Intro";
+import Lenis from 'lenis';
+import { useEffect } from "react";
 const inter = Inter({ subsets: ['vietnamese'] })
 
 
@@ -20,13 +20,16 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const cookieStore = cookies()
-  const sessionToken = cookieStore.get('sessionToken')
-  let user: AccountResType['data'] | null = null
-  if (sessionToken) {
-    const data = await accountApiRequest.me(sessionToken.value)
-    user = data.payload.data
-  }
+  useEffect( () => {
+    const lenis = new Lenis()
+
+    function raf(time: number) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
+
+    requestAnimationFrame(raf)
+  }, [])
   return (
     <html lang='en' suppressHydrationWarning>
       <body className={`${inter.className}`}>
@@ -37,10 +40,11 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <AppProvider inititalSessionToken={sessionToken?.value} user={user}>
-            <Header user={user} />
+          <AppProvider>
+            <Header />
             <div className='mt-20'>{children}</div>
             <SlideSession />
+            <Intro />
             <Footer />
           </AppProvider>
         </ThemeProvider>

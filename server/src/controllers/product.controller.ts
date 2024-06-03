@@ -1,5 +1,5 @@
 import prisma from '@/database'
-import { ProductDTO } from '@/models/productDTO.model';
+import { ProductDTO } from '@/models/productDTO.model'
 import { ProductSchema, CreateProductBodyType, UpdateProductBodyType, SearchPageAndSortingType } from '@/schemaValidations/product.schema'
 
 

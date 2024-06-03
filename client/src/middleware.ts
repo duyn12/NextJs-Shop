@@ -27,6 +27,7 @@ export function middleware(request: NextRequest) {
   if (pathname.match(productEditRegex) && !sessionToken) {
     return NextResponse.redirect(new URL("/home/login", request.url));
   }
+  
   // Chưa đăng nhập admin thì không cho vào admin private paths
   if (
     AdminprivatePaths.some((path) => pathname.startsWith(path)) &&
