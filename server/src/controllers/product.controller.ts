@@ -12,7 +12,7 @@ export const getProductList = async (data: SearchPageAndSortingType) => {
     orderBy: {
       createdAt: 'desc'
     },
-    include: { category: true },
+    include: { category: true, ImageList: true },
     take: data.maxResultCount || undefined,
     skip: offset || undefined
   })
@@ -25,9 +25,12 @@ export const getProductList = async (data: SearchPageAndSortingType) => {
     categoryId: product.categoryId,
     categoryName: product.category.name,
     quantity: product.quantity,
-    img: product.img,
+    listImg: product.ImageList.map((image) => ({
+      id : image.id,
+      img :image.image
+    })),
     createdAt: product.createdAt,
-    updatedAt: product.updatedAt
+    updatedAt: product.updatedAt,
   }))
 
   const validatedProducts = ProductSchema.array().parse(validatedData)
@@ -40,8 +43,10 @@ export const getProductDetail = async (id: number) => {
     where: {
       id
     },
-    include: { category: true},
+    include: { category: true, ImageList: true},
   });
+
+
   return new ProductDTO(
     productEntity.id,
     productEntity.name,
@@ -50,7 +55,10 @@ export const getProductDetail = async (id: number) => {
     productEntity.categoryId,
     productEntity.category.name,
     productEntity.quantity,
-    productEntity.img,
+    productEntity.ImageList.map((image) => ({
+      id : image.id,
+      img :image.image
+    })),
     productEntity.createdAt,
     productEntity.updatedAt
   )
@@ -58,6 +66,9 @@ export const getProductDetail = async (id: number) => {
 
 export const createProduct = async (data: CreateProductBodyType) => {
   const productEntity = await prisma.product.create({
+    include: {
+      ImageList: true,
+    },
     data
   })
   return new ProductDTO(
@@ -68,7 +79,10 @@ export const createProduct = async (data: CreateProductBodyType) => {
     productEntity.categoryId,
     "null",
     productEntity.quantity,
-    productEntity.img,
+    productEntity.ImageList.map((image) => ({
+      id : image.id,
+      img :image.image
+    })),
     productEntity.createdAt,
     productEntity.updatedAt
   )
@@ -76,6 +90,9 @@ export const createProduct = async (data: CreateProductBodyType) => {
 
 export const updateProduct = async (id: number, data: UpdateProductBodyType) => {
   const productEntity = await prisma.product.update({
+    include: {
+      ImageList: true
+    },
     where: {
       id
     },
@@ -89,7 +106,10 @@ export const updateProduct = async (id: number, data: UpdateProductBodyType) => 
     productEntity.categoryId,
     "null",
     productEntity.quantity,
-    productEntity.img,
+    productEntity.ImageList.map((image) => ({
+      id : image.id,
+      img :image.image
+    })),
     productEntity.createdAt,
     productEntity.updatedAt
   )

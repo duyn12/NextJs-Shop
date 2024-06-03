@@ -8,11 +8,20 @@ export const SearchPageAndSorting = z.object({
 
 export type SearchPageAndSortingType = z.TypeOf<typeof SearchPageAndSorting>
 
+export const ImageCreateResType = z.object({
+  img: z.string().url()
+})
+
+export const ImageUpdateResType = z.object({
+  id: z.number(),
+  img: z.string().url()
+})
+
 export const CreateProductBody = z.object({
   name: z.string().min(1).max(256),
   price: z.number().positive(),
   description: z.string().max(10000),
-  img: z.string().url(),
+  listImg: z.array(ImageCreateResType),
   quantity: z.number().positive(),
   categoryId: z.number()
 })
@@ -27,7 +36,7 @@ export const ProductSchema = z.object({
   categoryId: z.number(),
   categoryName: z.string(),
   quantity: z.number().positive(),
-  img: z.string().url(),
+  listImg: z.array(ImageUpdateResType),
   createdAt: z.date(),
   updatedAt: z.date()
 })
@@ -47,8 +56,17 @@ export const ProductListRes = z.object({
 
 export type ProductListResType = z.TypeOf<typeof ProductListRes>
 
-export const UpdateProductBody = CreateProductBody
-export type UpdateProductBodyType = CreateProductBodyType
+export const UpdateProductBody = z.object({
+  name: z.string().min(1).max(256),
+  price: z.number().positive(),
+  description: z.string().max(10000),
+  listImg: z.array(ImageUpdateResType),
+  quantity: z.number().positive(),
+  categoryId: z.number()
+})
+
+export type UpdateProductBodyType = z.TypeOf<typeof UpdateProductBody>
+
 export const ProductParams = z.object({
   id: z.coerce.number()
 })
